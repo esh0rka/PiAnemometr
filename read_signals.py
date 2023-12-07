@@ -47,39 +47,6 @@ def get_values():
             direction_bits = ''
             sleep(1)
 
-    # while True:
-    #     while True:
-    #         if Device.pin_factory.pin(18).state == 0:
-    #             if Device.pin_factory.pin(17).state == 1:
-    #                 speed_bits += '1'
-    #             else:
-    #                 speed_bits += '0'
-    #
-    #         if len(speed_bits) == 12:
-    #             print('speed_bits', speed_bits)
-    #         else:
-    #             Device.pin_factory.pin(18).drive_high()
-    #
-    #         if Device.pin_factory.pin(20).state == 0:
-    #             if Device.pin_factory.pin(19).state == 1:
-    #                 direction_bits += '1'
-    #             else:
-    #                 direction_bits += '0'
-    #             Device.pin_factory.pin(20).drive_high()
-    #
-    #         if len(direction_bits) == 12:
-    #             print('direction_bits', direction_bits)
-    #         else:
-    #             Device.pin_factory.pin(20).drive_high()
-    #
-    #         if Device.pin_factory.pin(18).state == 0 and Device.pin_factory.pin(20).state == 0:
-    #             speed_bits = ''
-    #             direction_bits = ''
-    #             Device.pin_factory.pin(18).drive_high()
-    #             Device.pin_factory.pin(20).drive_high()
-    #
-    #     sleep(1)
-
 
 handler_thread = threading.Thread(target=get_values)
 handler_thread.start()
