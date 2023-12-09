@@ -1,5 +1,6 @@
 from sensor_emulating import graphical_sensor_emulator, airflow_speed_sensor, airflow_direction_sensor
 import threading
+import copy
 
 value_dict = {"speed": 0, "degree": 0}
 
@@ -7,8 +8,10 @@ value_dict = {"speed": 0, "degree": 0}
 def check_pin(pin_factory):
     while True:
         if pin_factory.pin(20).state == 1 and pin_factory.pin(18).state == 1:
-            airflow_speed_sensor.signaling(pin_factory, value_dict["speed"])
-            airflow_direction_sensor.signaling(pin_factory, value_dict["degree"])
+            current_values = copy.copy(value_dict)
+            airflow_speed_sensor.signaling(pin_factory, current_values["speed"], 1)
+            airflow_speed_sensor.signaling(pin_factory, current_values["speed"], 2)
+            airflow_direction_sensor.signaling(pin_factory, current_values["degree"])
         else:
             continue
 
