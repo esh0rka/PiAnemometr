@@ -1,7 +1,6 @@
 import socket
 import struct
 import datetime
-from time import sleep
 
 
 def run_client(value_list: list, parametrs):

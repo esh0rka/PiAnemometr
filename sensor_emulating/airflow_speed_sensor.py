@@ -1,8 +1,23 @@
-def signaling(pin_factory, value, sensorNumber = 1):
-    value = str('{:.2f}'.format(value)).replace('.', '')
-    value = "{0:014b}".format(int(value))
+import random
+from time import sleep
 
-    if sensorNumber == 2:
+
+def signaling(pin_factory, value, sensor_number=1, error_probability=0.0, malfunction_simulation=False):
+    if sensor_number == 2:
+        if error_probability != 0:
+            random_number = random.randint(1, 100)
+            if random_number < error_probability * 100:
+                value += 2.0
+
+        if malfunction_simulation:
+            random_number = random.randint(1, 5)
+            if random_number == 1:
+                sleep(6)
+                return
+
+        value = str('{:.2f}'.format(value)).replace('.', '')
+        value = "{0:014b}".format(int(value))
+
         for index, bit in enumerate(value):
             match bit:
                 case '1':
@@ -15,6 +30,9 @@ def signaling(pin_factory, value, sensorNumber = 1):
             while pin_factory.pin(22).state == 0:
                 if index == len(value) - 1:
                     return
+
+    value = str('{:.2f}'.format(value)).replace('.', '')
+    value = "{0:014b}".format(int(value))
 
     for index, bit in enumerate(value):
         match bit:

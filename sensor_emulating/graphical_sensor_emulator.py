@@ -67,7 +67,17 @@ def get_degrees(arrow_x, arrow_y):
     return angle_degrees
 
 
-def init_window(values_list: dict):
+def init_window(values_list: dict, debug_values: list):
+    def on_checkbox_debug_toggle():
+        if checkbox_debug_var.get():
+            debug_values[1] = True
+        else:
+            debug_values[1] = False
+
+    def submit_debug_probability():
+        entered_probability = float(debug_entry.get())
+        debug_values[0] = entered_probability
+
     root = tk.Tk()
     root.title("Симуляция скорости и направления потока воздуха")
 
@@ -95,6 +105,17 @@ def init_window(values_list: dict):
     speed_label = canvas.create_text(20, 40, text="Скорость потока воздуха: ", fill="black", anchor="w")
     global speed_label_text
     speed_label_text = canvas.create_text(190, 40, text="Не выбрано", fill="blue", anchor="w")
+
+    checkbox_debug_var = tk.BooleanVar()
+    checkbox_debug = tk.Checkbutton(root, text="Симуляция поломки", variable=checkbox_debug_var, command=on_checkbox_debug_toggle)
+    checkbox_debug.place(x=15, y=48)
+
+    debug_entry = tk.Entry(root, width=5)
+    debug_entry.place(x=180, y=48)
+
+    submit_button = tk.Button(root, text="Раскалибровать", command=submit_debug_probability)
+    submit_button.place(x=240, y=46)
+
     canvas.bind("<Button-1>", start_drag)
     canvas.bind("<B1-Motion>", lambda event: drag(event, values_list))
     canvas.bind("<ButtonRelease-1>", stop_drag)
