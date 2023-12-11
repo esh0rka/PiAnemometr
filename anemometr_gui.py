@@ -22,7 +22,6 @@ def open_new_window():
             header = next(csvreader)
 
             for row in csvreader:
-                #columns = row.split(',')
                 speed_value_row = float(row[0])
 
                 if speed_value_row < 100:

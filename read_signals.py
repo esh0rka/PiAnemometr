@@ -32,8 +32,6 @@ def get_values():
 
     while True:
         if len(speed_bits) != 0 and len(speed_bits) != 14 and (datetime.now() - last_reading_time_speed_1).total_seconds() > 5:
-            print('TIME: ', last_reading_time_speed_1, '\nCURR: ', datetime.now(), 'BITS: ', speed_bits)
-            print('DIFF: ', (datetime.now() - last_reading_time_speed_1).total_seconds())
             speed_bits = '11111111111111'
             speed_bits_additional_sensor = '11111111111110'
             direction_bits = '000000000000'
